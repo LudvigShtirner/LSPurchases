@@ -3,14 +3,15 @@
 
 import PackageDescription
 
+private let lsPurchases = "LSPurchases"
+private let lsPurchasesTests = "LSPurchasesTests"
+
 let package = Package(
-    name: "LSPurchases",
+    name: lsPurchases,
     platforms: [.iOS(.v13)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "LSPurchases",
-            targets: ["LSPurchases"]),
+        .library(name: lsPurchases,
+                 targets: [lsPurchases]),
     ],
     dependencies: [
         .package(url: "https://github.com/LudvigShtirner/CoreObjects.git",
@@ -19,13 +20,11 @@ let package = Package(
                  (.init(3, 0, 0) ..< .init(4, 0, 0)))
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "LSPurchases",
-            dependencies: ["CoreObjects", "ApphudSDK"]),
-        .testTarget(
-            name: "LSPurchasesTests",
-            dependencies: ["LSPurchases"]),
+        .target(name: lsPurchases,
+                dependencies: ["CoreObjects", "ApphudSDK"]),
+        .testTarget(name: lsPurchasesTests,
+                    dependencies: [
+                        .byName(name: lsPurchases)
+                    ]),
     ]
 )

@@ -30,7 +30,7 @@ final class InAppDirectorApphud: InAppDirector {
     }
     
     // MARK: - Stored Info
-    @UDStored(key: "subscriptionWasMigrated", defaultValue: false)
+    @UDStored(key: .subscriptionWasMigrated, defaultValue: false)
     private var subscriptionWasMigrated: Bool
     
     // MARK: - Init
@@ -264,4 +264,8 @@ extension InAppDirectorApphud: InAppFetcherDelegate {
 //                                       parameters: .make(error: error))
         }
     }
+}
+
+private extension UserDefaultsKey {
+    static var subscriptionWasMigrated: UserDefaultsKey { "subscriptionWasMigrated" }
 }
