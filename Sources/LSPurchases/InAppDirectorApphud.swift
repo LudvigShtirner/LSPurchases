@@ -163,9 +163,13 @@ extension InAppDirectorApphud {
 extension InAppDirectorApphud {
     private func configureAndStart(apphudSDKToken: String) {
         purshaseWrapper.setDelegate(self)
-        purshaseWrapper.start(apiKey: apphudSDKToken)
-        migrateSubscriptions()
         transactionAcquirer.delegate = self
+        Task { [weak self] in
+            await MainActor.run { [weak self] in
+                self?.purshaseWrapper.start(apiKey: apphudSDKToken)
+            }
+            self?.migrateSubscriptions()
+        }
     }
     
     func fetchInAppProducts() {

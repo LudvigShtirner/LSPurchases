@@ -8,7 +8,7 @@ private let lsPurchasesTests = "LSPurchasesTests"
 
 let package = Package(
     name: lsPurchases,
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(name: lsPurchases,
                  targets: [lsPurchases]),
